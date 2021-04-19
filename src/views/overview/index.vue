@@ -12,8 +12,8 @@
     </div>
     <div class="section2">
       <div><card></card></div>
-      <div>2</div>
-      <div>3</div>
+      <div><card></card></div>
+      <div><card></card></div>
     </div>
   </div>
 </template>
@@ -42,6 +42,8 @@ export default defineComponent({
 .section2 {
   display: grid;
   grid-template-columns: 33.3% 33.3% 33.3%;
+  grid-column-gap: 20px;
+  margin-top: -18px;
   color: #fff;
 }
 </style>
