@@ -1,17 +1,21 @@
 <template>
   <div class="wrapper">
     <div>
-      <div class="left"><img src="../../assets/info_1.png" /></div>
+      <div class="left"><img :src="countInfo.img1" /></div>
       <div class="right">
-        <p>车辆总数（辆）</p>
-        <p class="yellow font">12356</p>
+        <p>{{ countInfo.title1 }}</p>
+        <p class="font" :style="countInfo.styleObject">
+          {{ countInfo.count1 }}
+        </p>
       </div>
     </div>
     <div>
-      <div class="left"><img src="../../assets/info_1.png" /></div>
+      <div class="left"><img :src="countInfo.img2" /></div>
       <div class="right">
-        <p>车辆总数（辆）</p>
-        <p class="yellow font">12356</p>
+        <p>{{ countInfo.title2 }}</p>
+        <p class="font" :style="countInfo.styleObject">
+          {{ countInfo.count2 }}
+        </p>
       </div>
     </div>
   </div>
@@ -20,6 +24,15 @@
 import { defineComponent, ref, reactive } from "vue";
 export default defineComponent({
   name: "card",
+  props: {
+    countInfo: {
+      type: Object,
+      required: true,
+      default: function () {
+        return {};
+      },
+    },
+  },
 });
 </script>
 <style scoped>
@@ -44,9 +57,6 @@ export default defineComponent({
   height: 100%;
   width: 70%;
   padding-top: 22px;
-}
-.yellow {
-  color: #ffff43;
 }
 .font {
   font-size: 28px;

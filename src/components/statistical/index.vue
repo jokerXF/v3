@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper">
     <div class="static">
-      <slot name="icon"></slot>
-      <slot></slot>
+      <slot name="icon" class="icon"></slot>
+      <div><slot class="content"></slot></div>
     </div>
   </div>
 </template>
@@ -24,5 +24,12 @@ export default defineComponent({
   border-radius: 2px;
   box-shadow: 0px 3px 3px #61d2f7;
   color: #25f3e6;
+}
+
+.icon {
+  padding-right: 6px;
+}
+.content {
+  font-size: 16px;
 }
 </style>
