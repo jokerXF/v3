@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="statistical-wrapper">
     <div class="static">
       <slot name="icon" class="icon"></slot>
       <div><slot class="content"></slot></div>
@@ -13,7 +13,7 @@ export default defineComponent({
 });
 </script>
 <style scoped>
-.static {
+.statistical-wrapper {
   width: 150px;
   height: 40px;
   line-height: 40px;

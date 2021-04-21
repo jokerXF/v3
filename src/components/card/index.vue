@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="card-wrapper">
     <div>
       <div class="left"><img :src="countInfo.img1" /></div>
       <div class="right">
@@ -36,7 +36,7 @@ export default defineComponent({
 });
 </script>
 <style scoped>
-.wrapper {
+.card-wrapper {
   width: 100%;
   height: 110px;
   height: 110px;
@@ -60,6 +60,7 @@ export default defineComponent({
 }
 .font {
   font-size: 28px;
-  font-weight: 600;
+  font-weight: 700;
+  margin-top: -10px;
 }
 </style>

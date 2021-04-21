@@ -14,18 +14,42 @@
     <!-- <div class="section2">
       <div v-for="(item,index) in cardList" :key="index"><tcard :countInfo="item"></tcard></div>
     </div> -->
+    <div class="section3">
+      <div>
+        <cardchart :chartOptions="chartOptions">
+          <template v-slot:title
+            ><img src="../../assets/title_1.png" /><span
+              >车辆类型统计</span
+            ></template
+          >
+        </cardchart>
+      </div>
+      <div></div>
+      <div>
+        <CardChart>
+          <template v-slot:title
+            ><img class="img" src="../../assets/title_4.png" /><span
+              >车辆行驶统计</span
+            ></template
+          ></CardChart
+        >
+      </div>
+    </div>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, reactive } from "vue";
+import { defineComponent, ref, reactive, onMounted } from "vue";
+import * as echarts from "echarts";
 import statistical from "../../components/statistical/index.vue";
 import card from "../../components/card/index.vue";
+import cardchart from "../../components/card-chart/index.vue";
 //import tcard from "../../components/tcard/index";
 export default defineComponent({
   name: "overview",
   components: {
     statistical,
     card,
+    cardchart,
     //tcard
   },
   setup(props) {
@@ -64,15 +88,35 @@ export default defineComponent({
         },
       },
     ];
+    let option = {
+      title: {
+        text: "ECharts 入门示例",
+      },
+      tooltip: {},
+      xAxis: {
+        data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"],
+      },
+      yAxis: {},
+      series: [
+        {
+          name: "销量",
+          type: "bar",
+          data: [5, 20, 36, 10, 10, 20],
+        },
+      ],
+    };
+    const chartOptions = reactive(option);
     return {
       cardList,
+      chartOptions,
     };
   },
 });
 </script>
 <style scoped>
 .wrapper {
-  margin: 22px 4px;
+  margin: 22px 10px;
+  width: 97%;
 }
 /* .icon {
   padding-right: 6px;
@@ -82,11 +126,20 @@ export default defineComponent({
 } */
 .section2 {
   display: grid;
-  grid-template-columns: 33.3% 33.3% 33.3%;
+  grid-template-columns: 33% 33% 33%;
   grid-column-gap: 20px;
   color: #fff;
-  width: 98%;
+  width: 100%;
   margin: 0 auto;
-  margin-top: -17px;
+  margin-top: 26px;
+  margin-bottom: 22px;
+}
+.section3 {
+  display: grid;
+  grid-template-columns: 25% 47% 25%;
+  grid-column-gap: 30px;
+  color: #fff;
+  width: 100%;
+  margin: 0 auto;
 }
 </style>
