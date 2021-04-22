@@ -3,7 +3,7 @@
     <div class="title">
       <slot name="title"></slot>
     </div>
-    <div id="myChart" class="chart"></div>
+    <div :id="id" class="chart"></div>
   </div>
 </template>
 <script lang="ts">
@@ -12,19 +12,23 @@ import { defineComponent, onMounted, ref, reactive } from "vue";
 export default defineComponent({
   name: "cardchart",
   props: {
-    options: {
+    chartOptions: {
       type: Object,
       required: true,
+    },
+    id: {
+      type: String,
     },
   },
   setup(props, { slots }) {
     onMounted(() => {
       initChart();
     });
-    const initChart = () => {
-      let myChart = echarts.init(document.getElementById("myChart"));
-      // 绘制图表
-      myChart.setOption(props.options);
+    const initChart = (): void => {
+      const myChart = echarts.init(
+        document.getElementById(props.id as string) as HTMLElement
+      );
+      myChart.setOption(props.chartOptions);
     };
     return { initChart };
   },
@@ -52,15 +56,9 @@ export default defineComponent({
   background-color: #034c6a;
   text-align: center;
 }
-.img {
-  padding-right: 8px !important;
-}
 .chart {
   margin-top: 17px;
   height: 250px;
   width: 100%;
-}
-span {
-  margin-left: 10px;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div class="section1">
-      <statistical>
+      <statistical @alert-modal="test($event)">
         <template v-slot:icon><span class="icon"> </span></template>
         <template v-slot:default><span> 总体概览</span></template>
       </statistical>
@@ -16,7 +16,7 @@
     </div> -->
     <div class="section3">
       <div>
-        <cardchart :chartOptions="chartOptions">
+        <cardchart :chartOptions="chartOptions1" id="car">
           <template v-slot:title
             ><img src="../../assets/title_1.png" /><span
               >车辆类型统计</span
@@ -26,13 +26,13 @@
       </div>
       <div></div>
       <div>
-        <CardChart>
+        <cardchart1 :chartOptions="chartOptions2" id="cart">
           <template v-slot:title
-            ><img class="img" src="../../assets/title_4.png" /><span
+            ><img src="../../assets/title_4.png" /><span
               >车辆行驶统计</span
             ></template
-          ></CardChart
-        >
+          >
+        </cardchart1>
       </div>
     </div>
   </div>
@@ -43,6 +43,7 @@ import * as echarts from "echarts";
 import statistical from "../../components/statistical/index.vue";
 import card from "../../components/card/index.vue";
 import cardchart from "../../components/card-chart/index.vue";
+import cardchart1 from "../../components/card-chart/index.vue";
 //import tcard from "../../components/tcard/index";
 export default defineComponent({
   name: "overview",
@@ -50,6 +51,7 @@ export default defineComponent({
     statistical,
     card,
     cardchart,
+    cardchart1,
     //tcard
   },
   setup(props) {
@@ -88,27 +90,76 @@ export default defineComponent({
         },
       },
     ];
-    let option = {
+    let option1 = {
+      tooltip: {
+        trigger: "item",
+      },
+      legend: {
+        top: "5%",
+        left: "right",
+        textStyle: {
+          color: "#fff",
+        },
+        orient: "horizontal",
+      },
+      series: [
+        {
+          name: "访问来源",
+          type: "pie",
+          radius: ["40%", "70%"],
+          avoidLabelOverlap: false,
+          label: {
+            show: false,
+            position: "center",
+          },
+          emphasis: {
+            label: {
+              show: true,
+              fontSize: "40",
+              fontWeight: "bold",
+            },
+          },
+          labelLine: {
+            show: false,
+          },
+          data: [
+            { value: 1048, name: "搜索引擎" },
+            { value: 735, name: "直接访问" },
+            { value: 580, name: "邮件营销" },
+            { value: 484, name: "联盟广告" },
+            { value: 300, name: "视频广告" },
+          ],
+        },
+      ],
+    };
+
+    let option2 = {
       title: {
         text: "ECharts 入门示例",
       },
       tooltip: {},
       xAxis: {
-        data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"],
+        data: ["香蕉", "火龙果", "血橙", "耙耙柑", "苹果", "菠萝"],
       },
       yAxis: {},
       series: [
         {
           name: "销量",
           type: "bar",
-          data: [5, 20, 36, 10, 10, 20],
+          data: [5, 20, 16, 10, 10, 20],
         },
       ],
     };
-    const chartOptions = reactive(option);
+    const chartOptions1 = reactive(option1);
+    const chartOptions2 = reactive(option2);
+    function test($event) {
+      console.log($event);
+    }
     return {
       cardList,
-      chartOptions,
+      chartOptions1,
+      chartOptions2,
+      test,
     };
   },
 });
